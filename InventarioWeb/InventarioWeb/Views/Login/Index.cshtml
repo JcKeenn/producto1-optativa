@@ -1,0 +1,218 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>PokéMart · Iniciar sesión</title>
+
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet"
+          href="~/css/login.css" />
+
+</head>
+
+
+<body>
+
+
+    <main class="login-hero">
+
+        <!-- =========================
+             PANEL DE MARCA
+             ========================= -->
+
+        <section class="login-brand-side">
+
+            <div class="brand-top">
+
+                <div class="pk-ball pk-ball-sm"></div>
+
+                <span class="brand-kicker">
+                    Centro de Operaciones
+                </span>
+
+            </div>
+
+            <div class="brand-core">
+
+                <div class="pk-ball pk-ball-hero"></div>
+
+                <h1 class="brand-title">
+                    POKÉ<span>MART</span>
+                </h1>
+
+                <p class="brand-tagline">
+                    Gestiona el inventario de tu tienda de cartas
+                    como un verdadero Maestro Pokémon.
+                </p>
+
+                <div class="brand-chips">
+
+                    <span class="brand-chip">
+                        <i class="bi bi-box-seam"></i>
+                        Inventario
+                    </span>
+
+                    <span class="brand-chip">
+                        <i class="bi bi-cart-check"></i>
+                        Ventas
+                    </span>
+
+                    <span class="brand-chip">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        Control
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p class="brand-foot">
+                ¡Hazte con todos los registros!
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PANEL DE FORMULARIO
+             ========================= -->
+
+        <section class="login-form-side">
+
+            <div class="login-card">
+
+                <div class="login-title">
+
+                    <div class="login-icon">
+                        <div class="pk-ball pk-ball-md"></div>
+                    </div>
+
+                    <h2>
+                        Iniciar sesión
+                    </h2>
+
+                    <p>
+                        Ingresa tus datos para entrar al sistema
+                    </p>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                </div>
+
+
+                <!-- FORMULARIO -->
+
+                <form method="post">
+
+                    <div class="mb-3">
+
+                        <label for="usuario"
+                               class="form-label">
+                            Usuario
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="usuario"
+                                   name="usuario"
+                                   placeholder="Ej. admin"
+                                   autocomplete="username"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label for="password"
+                               class="form-label">
+                            Contraseña
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill"></i>
+                            </span>
+
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Tu contraseña"
+                                   autocomplete="current-password"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit"
+                            class="btn btn-login w-100">
+
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        ¡Atrapar acceso!
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+            <footer class="login-footer">
+
+                <span>© 2026 PokéMart</span>
+                <span class="footer-dot">•</span>
+                <span>Todos los derechos reservados</span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

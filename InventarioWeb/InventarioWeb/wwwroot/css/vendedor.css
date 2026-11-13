@@ -1,0 +1,687 @@
+﻿/* ==========================================
+   VENDEDOR — Tema Pokémon TCG
+   ========================================== */
+
+:root {
+    --pk-red: #E3350D;
+    --pk-red-dark: #B62602;
+    --pk-yellow: #FFCB05;
+    --pk-yellow-soft: #FFEDB0;
+    --pk-blue: #2A75BB;
+    --pk-navy: #1D2C5E;
+    --pk-ink: #17203A;
+    --pk-paper: #F4EFE4;
+    --pk-card: #FFFFFF;
+    --pk-green: #2E9E5B;
+    --pk-gray: #8A91A3;
+
+    --pk-border: 3px solid var(--pk-navy);
+    --pk-border-md: 2px solid var(--pk-navy);
+    --pk-radius: 18px;
+    --pk-shadow: 7px 7px 0 var(--pk-navy);
+    --pk-shadow-sm: 4px 4px 0 var(--pk-navy);
+    --pk-shadow-xs: 2px 2px 0 var(--pk-navy);
+
+    --font-brand: "Fredoka", "Nunito", sans-serif;
+    --font-body: "Nunito", "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--pk-ink);
+    background-color: var(--pk-paper);
+    background-image: radial-gradient(rgba(29, 44, 94, .08) 2px, transparent 2px);
+    background-size: 24px 24px;
+}
+
+
+/* ==========================================
+   ENCABEZADO (banda roja)
+   ========================================== */
+
+.encabezado {
+    background:
+        radial-gradient(circle at 92% 50%, rgba(255, 255, 255, .15) 0 40px, transparent 40px),
+        linear-gradient(135deg, var(--pk-red), var(--pk-red-dark));
+    border: var(--pk-border);
+    border-radius: var(--pk-radius);
+    padding: 18px 24px;
+    margin: 24px auto 26px;
+    max-width: 1500px;
+    box-shadow: var(--pk-shadow);
+    color: #fff;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .18);
+    border: var(--pk-border-md);
+    border-radius: 14px;
+    box-shadow: 3px 3px 0 rgba(23, 32, 58, .4);
+}
+
+.marca {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-shadow: 2px 2px 0 rgba(29, 44, 94, .5);
+}
+
+.marca span {
+    color: var(--pk-yellow);
+}
+
+.texto-encabezado {
+    color: rgba(255, 255, 255, .85);
+    font-weight: 700;
+    font-size: .85rem;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pk-navy);
+    border: var(--pk-border-md);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-weight: 800;
+    font-size: .88rem;
+    color: var(--pk-yellow);
+    box-shadow: var(--pk-shadow-xs);
+}
+
+.encabezado .btn-outline-light {
+    font-weight: 800;
+    border: 2px solid #fff;
+    border-radius: 12px;
+}
+
+.encabezado .btn-outline-light:hover {
+    background: var(--pk-yellow);
+    border-color: var(--pk-navy);
+    color: var(--pk-navy);
+}
+
+
+/* ==========================================
+   LAYOUT
+   ========================================== */
+
+.vendedor-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+}
+
+.vendedor-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 5fr) minmax(340px, 7fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.columna-derecha-vendedor {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* ==========================================
+   TARJETA: REALIZAR VENTA
+   ========================================== */
+
+.venta-card {
+    background: var(--pk-card);
+    border: var(--pk-border);
+    border-radius: var(--pk-radius);
+    box-shadow: var(--pk-shadow);
+    overflow: hidden;
+}
+
+.venta-card-header {
+    background: linear-gradient(135deg, var(--pk-red), var(--pk-red-dark));
+    color: #fff;
+    padding: 20px 24px;
+    border-bottom: var(--pk-border);
+}
+
+.venta-card-header h2 {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.venta-card-header h2 .bi {
+    color: var(--pk-yellow);
+}
+
+.venta-card-header p {
+    margin: 0;
+    font-weight: 600;
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .85);
+}
+
+.venta-form {
+    padding: 22px 24px;
+}
+
+.form-group-vendedor {
+    margin-bottom: 18px;
+}
+
+.form-group-vendedor label {
+    display: block;
+    font-weight: 800;
+    color: var(--pk-navy);
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 6px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: var(--pk-blue);
+    font-size: 1.05rem;
+    pointer-events: none;
+}
+
+.input-icon .form-control {
+    padding-left: 42px;
+}
+
+.form-control,
+.form-select {
+    border: var(--pk-border-md);
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--pk-ink);
+    background: #FDFBF5;
+    padding: .6rem .85rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #fff;
+    border-color: var(--pk-blue);
+    box-shadow: 0 0 0 4px rgba(42, 117, 187, .18);
+}
+
+.cantidad-control {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.btn-cantidad {
+    width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: var(--pk-border-md);
+    border-radius: 10px;
+    box-shadow: var(--pk-shadow-xs);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.btn-cantidad:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--pk-navy);
+}
+
+.cantidad-input {
+    flex: 1;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--pk-ink);
+    border: var(--pk-border-md);
+    border-radius: 10px;
+    background: #FDFBF5;
+}
+
+.btn-agregar-carrito {
+    width: 100%;
+    font-family: var(--font-brand);
+    font-weight: 700;
+    letter-spacing: .03em;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: var(--pk-border);
+    border-radius: 14px;
+    padding: .78rem 1rem;
+    box-shadow: var(--pk-shadow-sm);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all .15s ease;
+}
+
+.btn-agregar-carrito:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--pk-shadow-xs);
+}
+
+
+/* ==========================================
+   CARRITO
+   ========================================== */
+
+.carrito-section {
+    border-top: var(--pk-border);
+    padding: 22px 24px 24px;
+}
+
+.carrito-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.carrito-header h3 {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--pk-navy);
+    margin: 0 0 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carrito-header h3 .bi {
+    color: var(--pk-red);
+}
+
+.carrito-header p {
+    margin: 0;
+    font-weight: 600;
+    font-size: .84rem;
+    color: var(--pk-blue);
+}
+
+.carrito-contador {
+    font-weight: 800;
+    font-size: .8rem;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: var(--pk-border-md);
+    border-radius: 999px;
+    padding: 4px 14px;
+    box-shadow: var(--pk-shadow-xs);
+}
+
+.carrito-tabla-container {
+    border: var(--pk-border-md);
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 280px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.carrito-tabla thead th {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--pk-navy);
+    padding: 10px 12px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+.carrito-tabla tbody td {
+    padding: 10px 12px;
+    font-weight: 600;
+    color: var(--pk-ink);
+    border-bottom: 1px solid rgba(29, 44, 94, .2);
+}
+
+.carrito-vacio td {
+    text-align: center;
+    padding: 32px 12px;
+    color: var(--pk-gray);
+    font-weight: 700;
+}
+
+.carrito-vacio i {
+    font-size: 1.7rem;
+    display: block;
+    margin-bottom: 6px;
+    color: var(--pk-red);
+}
+
+.carrito-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 13px 18px;
+    background: var(--pk-navy);
+    color: var(--pk-yellow);
+    border: var(--pk-border-md);
+    border-radius: 12px;
+    font-weight: 800;
+    box-shadow: var(--pk-shadow-xs);
+}
+
+.carrito-total strong {
+    font-family: var(--font-brand);
+    font-size: 1.3rem;
+}
+
+.venta-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.btn-cancelar-venta,
+.btn-confirmar-venta {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-brand);
+    font-weight: 700;
+    border: var(--pk-border-md);
+    border-radius: 12px;
+    padding: .7rem 1rem;
+    box-shadow: var(--pk-shadow-xs);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.btn-cancelar-venta {
+    background: #fff;
+    color: var(--pk-navy);
+}
+
+.btn-cancelar-venta:hover {
+    background: var(--pk-yellow-soft);
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--pk-navy);
+}
+
+.btn-confirmar-venta {
+    background: var(--pk-green);
+    color: #fff;
+}
+
+.btn-confirmar-venta:hover {
+    background: #3AB76E;
+    color: #fff;
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--pk-navy);
+}
+
+
+/* ==========================================
+   TARJETAS: PRODUCTOS Y VENTAS
+   ========================================== */
+
+.productos-card,
+.ventas-card {
+    background: var(--pk-card);
+    border: var(--pk-border);
+    border-radius: var(--pk-radius);
+    box-shadow: var(--pk-shadow);
+    overflow: hidden;
+}
+
+.productos-card-header,
+.ventas-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 22px;
+    background: #FDF8EC;
+    border-bottom: var(--pk-border);
+}
+
+.productos-card-header h2,
+.ventas-card-header h2 {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--pk-navy);
+    margin: 0 0 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.productos-card-header h2 .bi,
+.ventas-card-header h2 .bi {
+    color: var(--pk-red);
+}
+
+.productos-card-header p,
+.ventas-card-header p {
+    margin: 0;
+    font-weight: 600;
+    font-size: .86rem;
+    color: var(--pk-blue);
+}
+
+.productos-contador,
+.ventas-contador {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: .82rem;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: var(--pk-border-md);
+    border-radius: 999px;
+    padding: 5px 16px;
+    box-shadow: var(--pk-shadow-xs);
+}
+
+
+/* ------- buscador ------- */
+
+.tabla-buscador {
+    padding: 16px 22px 0;
+}
+
+
+/* ------- tablas ------- */
+
+.tabla-container {
+    padding: 14px 22px 22px;
+    overflow-x: auto;
+}
+
+.tabla-vendedor {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-vendedor thead th {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--pk-navy);
+    padding: 11px 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.tabla-vendedor thead th:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.tabla-vendedor thead th:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.tabla-vendedor tbody td {
+    padding: 11px 12px;
+    font-weight: 600;
+    color: var(--pk-ink);
+    border-bottom: 1px solid rgba(29, 44, 94, .2);
+}
+
+.tabla-vendedor tbody tr:hover td {
+    background: var(--pk-yellow-soft);
+}
+
+
+/* ------- badges de stock ------- */
+
+.stock-disponible,
+.stock-bajo {
+    display: inline-block;
+    min-width: 42px;
+    text-align: center;
+    font-weight: 800;
+    color: #fff;
+    border: var(--pk-border-md);
+    border-radius: 999px;
+    padding: 3px 12px;
+}
+
+.stock-disponible {
+    background: var(--pk-green);
+}
+
+.stock-bajo {
+    background: var(--pk-red);
+}
+
+.btn-ver-venta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: .8rem;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: var(--pk-border-md);
+    border-radius: 10px;
+    padding: 6px 14px;
+    box-shadow: var(--pk-shadow-xs);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.btn-ver-venta:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--pk-navy);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--pk-blue);
+    outline-offset: 2px;
+}
+
+
+/* ==========================================
+   POKÉBOLA (CSS puro)
+   ========================================== */
+
+.pk-ball {
+    border-radius: 50%;
+    border: 3px solid var(--pk-navy);
+    background: linear-gradient(var(--pk-red) 46%, #1F1F1F 46% 54%, #fff 54%);
+    position: relative;
+    flex: none;
+    box-shadow: 3px 3px 0 rgba(23, 32, 58, .35);
+}
+
+.pk-ball::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28%;
+    height: 28%;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--pk-navy);
+    transform: translate(-50%, -50%);
+}
+
+.pk-ball-sm { width: 30px; height: 30px; }
+
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 992px) {
+    .vendedor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .encabezado {
+        margin: 16px auto 20px;
+        padding: 14px 16px;
+    }
+
+    .venta-actions {
+        flex-direction: column-reverse;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: .01ms !important;
+        animation: none !important;
+    }
+}

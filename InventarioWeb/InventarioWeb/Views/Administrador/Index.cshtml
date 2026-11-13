@@ -1,0 +1,3807 @@
+﻿@{
+    ViewData["Title"] = "Panel de Administración";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet" />
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet"
+          href="~/css/Administrador.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- ENCABEZADO -->
+        <header class="admin-header">
+
+            <div class="admin-brand">
+                <div class="brand-icon">
+                    <div class="pk-ball pk-ball-sm"></div>
+                </div>
+
+                <div>
+                    <h1>POKÉ<span>MART</span></h1>
+                    <p>Panel de administración</p>
+                </div>
+            </div>
+
+            <div class="admin-actions">
+
+                <div class="admin-user">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <span>Administrador</span>
+                </div>
+
+                <a href="/Login/Index"
+                   class="btn btn-outline-light btn-sm rounded-3">
+                    <i class="bi bi-box-arrow-right me-1"></i>
+                    Cerrar sesión
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- MENU SUPERIOR -->
+        <nav class="admin-navbar">
+
+            <ul class="nav nav-pills admin-menu"
+                id="adminTabs"
+                role="tablist">
+
+                <!-- PRODUCTOS -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active"
+                            id="productos-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#productos"
+                            type="button"
+                            role="tab"
+                            aria-controls="productos"
+                            aria-selected="true">
+
+                        <i class="bi bi-box-seam"></i>
+                        PRODUCTOS
+
+                    </button>
+                </li>
+
+                <!-- CATEGORIAS -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="categorias-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#categorias"
+                            type="button"
+                            role="tab"
+                            aria-controls="categorias"
+                            aria-selected="false">
+
+                        <i class="bi bi-tags"></i>
+                        CATEGORÍAS
+
+                    </button>
+                </li>
+
+                <!-- PROVEEDORES -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="proveedores-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#proveedores"
+                            type="button"
+                            role="tab"
+                            aria-controls="proveedores"
+                            aria-selected="false">
+
+                        <i class="bi bi-truck"></i>
+                        PROVEEDORES
+
+                    </button>
+                </li>
+
+                <!-- USUARIOS -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="usuarios-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#usuarios"
+                            type="button"
+                            role="tab"
+                            aria-controls="usuarios"
+                            aria-selected="false">
+
+                        <i class="bi bi-people"></i>
+                        USUARIOS
+
+                    </button>
+                </li>
+
+                <!-- HISTORIAL -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="historial-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#historial"
+                            type="button"
+                            role="tab"
+                            aria-controls="historial"
+                            aria-selected="false">
+
+                        <i class="bi bi-clock-history"></i>
+                        HISTORIAL_INVENTARIO
+
+                    </button>
+                </li>
+                <!-- VENTAS -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="ventas-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#ventas"
+                            type="button"
+                            role="tab"
+                            aria-controls="ventas"
+                            aria-selected="false">
+
+                        <i class="bi bi-cart-check"></i>
+                        VENTAS
+
+                    </button>
+                </li>
+            </ul>
+
+        </nav>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="admin-content">
+
+            <div class="tab-content" id="adminTabsContent">
+
+                <!-- ================= PRODUCTOS ================= -->
+                <div class="tab-pane fade show active"
+                     id="productos"
+                     role="tabpanel"
+                     aria-labelledby="productos-tab"
+                     tabindex="0">
+
+                    
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                ADMINISTRACIÓN
+                            </span>
+
+                            <h2>Productos</h2>
+
+                            <p>
+                                Consulta y administra los productos
+                                registrados en el inventario.
+                            </p>
+                        </div>
+
+                        <div class="productos-menu">
+
+                            <button class="producto-opcion activo"
+                                    type="button"
+                                    id="btnAgregarProducto">
+
+                                <i class="bi bi-plus-lg"></i>
+                                AGREGAR
+
+                            </button>
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnActualizarProducto">
+
+                                <i class="bi bi-pencil-square"></i>
+                                ACTUALIZAR
+
+                            </button>
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnEliminarProducto">
+
+                                <i class="bi bi-trash3"></i>
+                                ELIMINAR
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FORMULARIO AGREGAR PRODUCTO -->
+
+                    <div class="producto-formulario" id="formAgregarProducto">
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-plus-lg"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Agregar producto</h3>
+
+                                    <p>
+                                        Registra un nuevo producto en el inventario.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- CODIGO DE BARRAS -->
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Código de barras
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="codigoBarras"
+                                           placeholder="Ej. 7501234567890">
+
+                                </div>
+
+
+                                <!-- NOMBRE -->
+                                <div class="col-md-8">
+
+                                    <label class="form-label">
+                                        Nombre del producto
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreProducto"
+                                           placeholder="Ej. Laptop Lenovo">
+
+                                </div>
+
+
+                                <!-- CATEGORIA -->
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Categoría
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="categoriaProducto">
+                                        <option value="">
+                                            Selecciona una categoría
+                                        </option>
+                                    </select>
+
+                                </div>
+
+
+                                <!-- PROVEEDOR -->
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Proveedor
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="proveedorProducto">
+                                        <option value="">
+                                            Selecciona un proveedor
+                                        </option>
+                                    </select>
+
+                                </div>
+
+
+                                <!-- PRECIO COMPRA -->
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Precio de compra
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            $
+                                        </span>
+
+                                        <input type="number"
+                                               class="form-control"
+                                               id="precioCompra"
+                                               placeholder="0.00"
+                                               min="0"
+                                               step="0.01">
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- PRECIO VENTA -->
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Precio de venta
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-text">
+                                            $
+                                        </span>
+
+                                        <input type="number"
+                                               class="form-control"
+                                               id="precioVenta"
+                                               placeholder="0.00"
+                                               min="0"
+                                               step="0.01">
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- STOCK MINIMO -->
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Stock mínimo
+                                    </label>
+
+                                    <input type="number"
+                                           class="form-control"
+                                           id="stockMinimo"
+                                           placeholder="5"
+                                           min="0">
+
+                                </div>
+
+
+                                <!-- DESCRIPCION -->
+                                <div class="col-12">
+
+                                    <label class="form-label">
+                                        Descripción
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="descripcionProducto"
+                                              rows="3"
+                                              placeholder="Descripción del producto..."></textarea>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOTONES -->
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-producto">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarProducto">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar producto
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FORMULARIO ACTUALIZAR PRODUCTO -->
+                    <div class="producto-formulario" id="formActualizarProducto" style="display: none;">
+
+                        <div class="producto-form-header">
+                            <div class="producto-form-titulo">
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-pencil-square"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Actualizar producto</h3>
+                                    <p>Modifica la información de un producto registrado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- ID DEL PRODUCTO -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Producto</label>
+
+                                    <select class="form-select" id="productoActualizar">
+                                        <option value="">Selecciona un producto</option>
+                                    </select>
+                                </div>
+
+                                <!-- CÓDIGO -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Código de barras</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="codigoActualizar"
+                                           placeholder="Código de barras">
+                                </div>
+
+                                <!-- NOMBRE -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Nombre del producto</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreActualizar"
+                                           placeholder="Nombre del producto">
+                                </div>
+
+                                <!-- CATEGORÍA -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Categoría</label>
+
+                                    <select class="form-select" id="categoriaActualizar">
+                                        <option value="">Selecciona una categoría</option>
+                                    </select>
+                                </div>
+
+                                <!-- PROVEEDOR -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Proveedor</label>
+
+                                    <select class="form-select" id="proveedorActualizar">
+                                        <option value="">Selecciona un proveedor</option>
+                                    </select>
+                                </div>
+
+                                <!-- PRECIO COMPRA -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Precio de compra</label>
+
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+
+                                        <input type="number"
+                                               class="form-control"
+                                               id="precioCompraActualizar"
+                                               placeholder="0.00"
+                                               min="0"
+                                               step="0.01">
+                                    </div>
+                                </div>
+
+                                <!-- PRECIO VENTA -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Precio de venta</label>
+
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+
+                                        <input type="number"
+                                               class="form-control"
+                                               id="precioVentaActualizar"
+                                               placeholder="0.00"
+                                               min="0"
+                                               step="0.01">
+                                    </div>
+                                </div>
+
+                                <!-- STOCK MÍNIMO -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Stock mínimo</label>
+
+                                    <input type="number"
+                                           class="form-control"
+                                           id="stockMinimoActualizar"
+                                           placeholder="5"
+                                           min="0">
+                                </div>
+
+                                <!-- DESCRIPCIÓN -->
+                                <div class="col-12">
+                                    <label class="form-label">Descripción</label>
+
+                                    <textarea class="form-control"
+                                              id="descripcionActualizar"
+                                              rows="3"
+                                              placeholder="Descripción del producto..."></textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-producto"
+                                    id="btnCancelarActualizar">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarActualizar">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar cambios
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FORMULARIO ELIMINAR PRODUCTO -->
+                    <div class="producto-formulario" id="formEliminarProducto" style="display: none;">
+
+                        <div class="producto-form-header">
+                            <div class="producto-form-titulo">
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-trash3"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Eliminar producto</h3>
+                                    <p>Selecciona el producto que deseas eliminar del inventario.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- PRODUCTO -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Producto</label>
+
+                                    <select class="form-select" id="productoEliminar">
+                                        <option value="">Selecciona un producto</option>
+                                    </select>
+                                </div>
+
+                                <!-- ID -->
+                                <div class="col-md-3">
+                                    <label class="form-label">ID del producto</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="idProductoEliminar"
+                                           placeholder="ID"
+                                           readonly>
+                                </div>
+
+                                <!-- CÓDIGO -->
+                                <div class="col-md-3">
+                                    <label class="form-label">Código de barras</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="codigoEliminar"
+                                           placeholder="Código"
+                                           readonly>
+                                </div>
+
+                                <!-- NOMBRE -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Nombre del producto</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreEliminar"
+                                           placeholder="Nombre"
+                                           readonly>
+                                </div>
+
+                                <!-- CATEGORÍA -->
+                                <div class="col-md-3">
+                                    <label class="form-label">Categoría</label>
+
+                                    <input type="text"
+                                       class="form-control"
+                                       id="categoriaEliminar"
+                                       placeholder="Categoría"
+                                       readonly>
+                                </div>
+
+                                <!-- PROVEEDOR -->
+                                <div class="col-md-3">
+                                    <label class="form-label">Proveedor</label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="proveedorEliminar"
+                                           placeholder="Proveedor"
+                                           readonly>
+                                </div>
+
+                            </div>
+
+                            <!-- AVISO -->
+                            <div class="alert alert-warning mt-4 mb-0 d-flex align-items-start gap-2">
+                                <i class="bi bi-exclamation-triangle-fill mt-1"></i>
+
+                                <div>
+                                    <strong>Atención</strong>
+                                    <div class="small">
+                                        Esta acción eliminará el producto seleccionado.
+                                        Verifica los datos antes de continuar.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-producto"
+                                    id="btnCancelarEliminar">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-danger"
+                                    id="btnConfirmarEliminar">
+
+                                <i class="bi bi-trash3 me-1"></i>
+                                Eliminar producto
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    
+                    <!-- TABLA DE PRODUCTOS -->
+
+                    <div class="productos-card">
+
+                        <div class="productos-card-header">
+
+                            <div>
+                                <h3>Productos registrados</h3>
+
+                                <p>
+                                    Lista de productos disponibles en el inventario.
+                                </p>
+                            </div>
+
+                            <div class="productos-contador">
+                                <i class="bi bi-box-seam"></i>
+                                <span id="contadorProductos">0 productos</span>
+                            </div>
+
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table class="table tabla-productos">
+
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CÓDIGO</th>
+                                        <th>PRODUCTO</th>
+                                        <th>CATEGORÍA</th>
+                                        <th>PROVEEDOR</th>
+                                        <th>PRECIO COMPRA</th>
+                                        <th>PRECIO VENTA</th>
+                                        <th>STOCK</th>
+                                        <th>STOCK MÍNIMO</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tablaProductosBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                    
+
+
+                </div>
+
+
+                <!-- ================= CATEGORIAS ================= -->
+
+                <div class="tab-pane fade"
+                     id="categorias"
+                     role="tabpanel"
+                     aria-labelledby="categorias-tab"
+                     tabindex="0">
+
+                    <!-- ENCABEZADO -->
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                ADMINISTRACIÓN
+                            </span>
+
+                            <h2>Categorías</h2>
+
+                            <p>
+                                Administra las categorías de los productos
+                                registrados en el inventario.
+                            </p>
+                        </div>
+
+                        <!-- MENU DE OPCIONES -->
+
+                        <div class="productos-menu">
+
+                            <button class="producto-opcion activo"
+                                    type="button"
+                                    id="btnAgregarCategoria">
+
+                                <i class="bi bi-plus-lg"></i>
+                                AGREGAR
+
+                            </button>
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnActualizarCategoria">
+
+                                <i class="bi bi-pencil-square"></i>
+                                ACTUALIZAR
+
+                            </button>
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnEliminarCategoria">
+
+                                <i class="bi bi-trash3"></i>
+                                ELIMINAR
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO AGREGAR CATEGORIA          -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formAgregarCategoria">
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-plus-lg"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Agregar categoría</h3>
+
+                                    <p>
+                                        Registra una nueva categoría
+                                        para organizar tus productos.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- NOMBRE -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Nombre de la categoría
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreCategoria"
+                                           maxlength="100"
+                                           placeholder="Ej. Electrónica">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorNombreCategoria"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DESCRIPCION -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Descripción
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="descripcionCategoria"
+                                              rows="3"
+                                              placeholder="Describe esta categoría..."></textarea>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-categoria"
+                                    id="btnCancelarAgregarCategoria">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarCategoria">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar categoría
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO ACTUALIZAR CATEGORIA       -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formActualizarCategoria"
+                         style="display: none;">
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-pencil-square"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Actualizar categoría</h3>
+
+                                    <p>
+                                        Modifica la información de una
+                                        categoría registrada.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- SELECCIONAR CATEGORIA -->
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Categoría
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="categoriaActualizar">
+
+                                        <option value="">
+                                            Selecciona una categoría
+                                        </option>
+
+                                    </select>
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorCategoriaActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ID -->
+
+                                <div class="col-md-2">
+
+                                    <label class="form-label">
+                                        ID
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="idCategoriaActualizar"
+                                           placeholder="ID"
+                                           readonly>
+
+                                </div>
+
+
+                                <!-- NOMBRE -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Nombre de la categoría
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreCategoriaActualizar"
+                                           maxlength="100"
+                                           placeholder="Nombre de la categoría">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorNombreCategoriaActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DESCRIPCION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+                                        Descripción
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="descripcionCategoriaActualizar"
+                                              rows="3"
+                                              placeholder="Descripción de la categoría..."></textarea>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-categoria"
+                                    id="btnCancelarActualizarCategoria">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarActualizarCategoria">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar cambios
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO ELIMINAR CATEGORIA         -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formEliminarCategoria"
+                         style="display: none;">
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+                                    <i class="bi bi-trash3"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Eliminar categoría</h3>
+
+                                    <p>
+                                        Selecciona la categoría que deseas
+                                        eliminar del inventario.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+                                <!-- SELECCIONAR CATEGORIA -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Categoría
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="categoriaEliminar">
+
+                                        <option value="">
+                                            Selecciona una categoría
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                                <div class="text-danger small mt-1"
+                                     id="errorCategoriaEliminar"
+                                     style="display: none;">
+                                </div>
+
+
+                                <!-- ID -->
+
+                                <div class="col-md-2">
+
+                                    <label class="form-label">
+                                        ID de categoría
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="idCategoriaEliminar"
+                                           placeholder="ID"
+                                           readonly>
+
+                                </div>
+
+
+                                <!-- NOMBRE -->
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+                                        Nombre
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreCategoriaEliminar"
+                                           placeholder="Nombre"
+                                           readonly>
+
+                                </div>
+
+
+                                <!-- DESCRIPCION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+                                        Descripción
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="descripcionCategoriaEliminar"
+                                              rows="3"
+                                              placeholder="Descripción"
+                                              readonly></textarea>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- AVISO -->
+
+                            <div class="alert alert-warning mt-4 mb-0 d-flex align-items-start gap-2">
+
+                                <i class="bi bi-exclamation-triangle-fill mt-1"></i>
+
+                                <div>
+                                    <strong>Atención</strong>
+
+                                    <div class="small">
+                                        Verifica la categoría seleccionada antes
+                                        de eliminarla. Los productos asociados
+                                        conservarán su registro, pero quedarán
+                                        sin categoría.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-categoria"
+                                    id="btnCancelarEliminarCategoria">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-danger"
+                                    id="btnConfirmarEliminarCategoria">
+
+                                <i class="bi bi-trash3 me-1"></i>
+                                Eliminar categoría
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===================================== -->
+                    <!-- TABLA DE CATEGORIAS                   -->
+                    <!-- ===================================== -->
+
+                    <div class="productos-card">
+
+                        <div class="productos-card-header">
+
+                            <div>
+                                <h3>Categorías registradas</h3>
+
+                                <p>
+                                    Lista de todas las categorías
+                                    disponibles en el inventario.
+                                </p>
+                            </div>
+
+                            <div class="productos-contador">
+
+                                <i class="bi bi-tags"></i>
+
+                                <span id="contadorCategorias">
+                                    0 categorías
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-responsive">
+
+                            <table class="table tabla-productos">
+
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>NOMBRE DE LA CATEGORÍA</th>
+                                        <th>DESCRIPCIÓN</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tablaCategoriasBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= PROVEEDORES ================= -->
+
+                <div class="tab-pane fade"
+                     id="proveedores"
+                     role="tabpanel"
+                     aria-labelledby="proveedores-tab"
+                     tabindex="0">
+
+                    <!-- ENCABEZADO -->
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                ADMINISTRACIÓN
+                            </span>
+
+                            <h2>Proveedores</h2>
+
+                            <p>
+                                Administra los proveedores registrados
+                                en el inventario.
+                            </p>
+
+                        </div>
+
+
+                        <!-- MENU DE OPCIONES -->
+
+                        <div class="productos-menu">
+
+                            <button class="producto-opcion activo"
+                                    type="button"
+                                    id="btnAgregarProveedor">
+
+                                <i class="bi bi-plus-lg"></i>
+                                AGREGAR
+
+                            </button>
+
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnActualizarProveedor">
+
+                                <i class="bi bi-pencil-square"></i>
+                                ACTUALIZAR
+
+                            </button>
+
+
+                            <button class="producto-opcion"
+                                    type="button"
+                                    id="btnEliminarProveedor">
+
+                                <i class="bi bi-trash3"></i>
+                                ELIMINAR
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO AGREGAR PROVEEDOR           -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formAgregarProveedor">
+
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+
+                                    <i class="bi bi-plus-lg"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>Agregar proveedor</h3>
+
+                                    <p>
+                                        Registra un nuevo proveedor
+                                        para el inventario.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+
+                                <!-- NOMBRE EMPRESA -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Nombre de la empresa
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreEmpresa"
+                                           maxlength="150"
+                                           placeholder="Ej. TechDistribuidora S.A.">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorNombreEmpresa"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- CONTACTO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Nombre del contacto
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="contactoNombre"
+                                           maxlength="100"
+                                           placeholder="Ej. Juan Pérez">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorContactoNombre"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- TELEFONO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Teléfono
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="telefonoProveedor"
+                                           maxlength="20"
+                                           placeholder="Ej. 2221234567">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorTelefonoProveedor"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- EMAIL -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Correo electrónico
+
+                                    </label>
+
+                                    <input type="email"
+                                           class="form-control"
+                                           id="emailProveedor"
+                                           maxlength="150"
+                                           placeholder="Ej. contacto@empresa.com">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorEmailProveedor"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- DIRECCION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+
+                                        Dirección
+
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="direccionProveedor"
+                                              rows="3"
+                                              maxlength="250"
+                                              placeholder="Dirección del proveedor..."></textarea>
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorDireccionProveedor"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-proveedor"
+                                    id="btnCancelarAgregarProveedor">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarProveedor">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar proveedor
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO ACTUALIZAR PROVEEDOR       -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formActualizarProveedor"
+                         style="display: none;">
+
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>Actualizar proveedor</h3>
+
+                                    <p>
+                                        Modifica la información de un
+                                        proveedor registrado.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+
+                                <!-- SELECCIONAR PROVEEDOR -->
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+
+                                        Proveedor
+
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="proveedorActualizar">
+
+                                        <option value="">
+
+                                            Selecciona un proveedor
+
+                                        </option>
+
+                                    </select>
+
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorProveedorActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- ID -->
+
+                                <div class="col-md-2">
+
+                                    <label class="form-label">
+
+                                        ID
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="idProveedorActualizar"
+                                           placeholder="ID"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- NOMBRE EMPRESA -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Nombre de la empresa
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreEmpresaActualizar"
+                                           maxlength="150"
+                                           placeholder="Nombre de la empresa">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorNombreEmpresaActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- CONTACTO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Nombre del contacto
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="contactoNombreActualizar"
+                                           maxlength="100"
+                                           placeholder="Nombre del contacto">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorContactoNombreActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- TELEFONO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Teléfono
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="telefonoProveedorActualizar"
+                                           maxlength="20"
+                                           placeholder="Teléfono">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorTelefonoProveedorActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- EMAIL -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Correo electrónico
+
+                                    </label>
+
+                                    <input type="email"
+                                           class="form-control"
+                                           id="emailProveedorActualizar"
+                                           maxlength="150"
+                                           placeholder="Correo electrónico">
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorEmailProveedorActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- DIRECCION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+
+                                        Dirección
+
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="direccionProveedorActualizar"
+                                              rows="3"
+                                              maxlength="250"
+                                              placeholder="Dirección del proveedor..."></textarea>
+
+                                    <div class="text-danger small mt-1"
+                                         id="errorDireccionProveedorActualizar"
+                                         style="display: none;">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-proveedor"
+                                    id="btnCancelarActualizarProveedor">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="btn btn-guardar-producto"
+                                    id="btnGuardarActualizarProveedor">
+
+                                <i class="bi bi-check-lg me-1"></i>
+                                Guardar cambios
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- FORMULARIO ELIMINAR PROVEEDOR         -->
+                    <!-- ===================================== -->
+
+                    <div class="producto-formulario"
+                         id="formEliminarProveedor"
+                         style="display: none;">
+
+
+                        <div class="producto-form-header">
+
+                            <div class="producto-form-titulo">
+
+                                <div class="producto-form-icono">
+
+                                    <i class="bi bi-trash3"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>Eliminar proveedor</h3>
+
+                                    <p>
+                                        Selecciona el proveedor que deseas
+                                        eliminar del inventario.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-body">
+
+                            <div class="row g-3">
+
+
+                                <!-- SELECCIONAR PROVEEDOR -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Proveedor
+
+                                    </label>
+
+                                    <select class="form-select"
+                                            id="proveedorEliminar">
+
+                                        <option value="">
+
+                                            Selecciona un proveedor
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="text-danger small mt-1"
+                                     id="errorProveedorEliminar"
+                                     style="display: none;">
+                                </div>
+
+
+
+                                <!-- ID -->
+
+                                <div class="col-md-2">
+
+                                    <label class="form-label">
+
+                                        ID de proveedor
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="idProveedorEliminar"
+                                           placeholder="ID"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- EMPRESA -->
+
+                                <div class="col-md-4">
+
+                                    <label class="form-label">
+
+                                        Empresa
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreEmpresaEliminar"
+                                           placeholder="Nombre de empresa"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- CONTACTO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Contacto
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="contactoNombreEliminar"
+                                           placeholder="Nombre del contacto"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- TELEFONO -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Teléfono
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="telefonoProveedorEliminar"
+                                           placeholder="Teléfono"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- EMAIL -->
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Correo electrónico
+
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control"
+                                           id="emailProveedorEliminar"
+                                           placeholder="Correo electrónico"
+                                           readonly>
+
+                                </div>
+
+
+
+                                <!-- DIRECCION -->
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+
+                                        Dirección
+
+                                    </label>
+
+                                    <textarea class="form-control"
+                                              id="direccionProveedorEliminar"
+                                              rows="3"
+                                              placeholder="Dirección"
+                                              readonly></textarea>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- AVISO -->
+
+                            <div class="alert alert-warning mt-4 mb-0 d-flex align-items-start gap-2">
+
+                                <i class="bi bi-exclamation-triangle-fill mt-1"></i>
+
+                                <div>
+
+                                    <strong>Atención</strong>
+
+                                    <div class="small">
+
+                                        Verifica el proveedor seleccionado antes
+                                        de eliminarlo. Esta acción eliminará
+                                        el registro del proveedor.
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="producto-form-footer">
+
+                            <button type="button"
+                                    class="btn btn-light btn-cancelar-proveedor"
+                                    id="btnCancelarEliminarProveedor">
+
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="btn btn-danger"
+                                    id="btnConfirmarEliminarProveedor">
+
+                                <i class="bi bi-trash3 me-1"></i>
+                                Eliminar proveedor
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- TABLA DE PROVEEDORES                  -->
+                    <!-- ===================================== -->
+
+                    <div class="productos-card">
+
+                        <div class="productos-card-header">
+
+                            <div>
+
+                                <h3>Proveedores registrados</h3>
+
+                                <p>
+                                    Lista de todos los proveedores
+                                    disponibles en el inventario.
+                                </p>
+
+                            </div>
+
+
+                            <div class="productos-contador">
+
+                                <i class="bi bi-truck"></i>
+
+                                <span id="contadorProveedores">
+
+                                    0 proveedores
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="table-responsive">
+
+                            <table class="table tabla-productos">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>ID</th>
+                                        <th>EMPRESA</th>
+                                        <th>CONTACTO</th>
+                                        <th>TELÉFONO</th>
+                                        <th>CORREO</th>
+                                        <th>DIRECCIÓN</th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="tablaProveedoresBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <!-- ==========================================
+     USUARIOS
+========================================== -->
+
+                <div class="tab-pane fade"
+                     id="usuarios"
+                     role="tabpanel"
+                     aria-labelledby="usuarios-tab">
+
+
+                    <!-- ==========================================
+         SUBMENÚ
+    ========================================== -->
+
+                    <div class="sub-menu-crud">
+
+                        <button type="button"
+                                id="btnAgregarUsuario"
+                                class="usuario-opcion activo">
+
+                            <i class="bi bi-person-plus"></i>
+                            Agregar
+
+                        </button>
+
+                        <button type="button"
+                                id="btnActualizarUsuario"
+                                class="usuario-opcion">
+
+                            <i class="bi bi-pencil-square"></i>
+                            Actualizar
+
+                        </button>
+
+                        <button type="button"
+                                id="btnEliminarUsuario"
+                                class="usuario-opcion">
+
+                            <i class="bi bi-person-x"></i>
+                            Eliminar
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ==========================================
+         FORMULARIO AGREGAR
+    ========================================== -->
+
+                    <div id="formAgregarUsuario"
+                         class="formulario-crud">
+
+                        <h4>Agregar usuario</h4>
+
+                        <form id="formNuevoUsuario"
+                              novalidate>
+
+                            <div class="row">
+
+                                <!-- NOMBRE -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="nombreUsuario"
+                                           class="form-label">
+
+                                        Nombre
+
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El nombre es obligatorio.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- APELLIDO -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="apellidoUsuario"
+                                           class="form-label">
+
+                                        Apellido
+
+                                    </label>
+
+                                    <input type="text"
+                                           id="apellidoUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El apellido es obligatorio.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- NOMBRE DE USUARIO -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="nombreUsuarioLogin"
+                                           class="form-label">
+
+                                        Nombre de usuario
+
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreUsuarioLogin"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El nombre de usuario es obligatorio.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- CORREO -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="correoUsuario"
+                                           class="form-label">
+
+                                        Correo electrónico
+
+                                    </label>
+
+                                    <input type="email"
+                                           id="correoUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        Ingresa un correo electrónico válido.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- CONTRASEÑA -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="passwordUsuario"
+                                           class="form-label">
+
+                                        Contraseña
+
+                                    </label>
+
+                                    <input type="password"
+                                           id="passwordUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        La contraseña es obligatoria.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ROL -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="rolUsuario"
+                                           class="form-label">
+
+                                        Rol
+
+                                    </label>
+
+                                    <select id="rolUsuario"
+                                            class="form-select"
+                                            required>
+
+                                        <option value="">
+                                            Selecciona un rol
+                                        </option>
+
+                                        <option value="Administrador">
+                                            Administrador
+                                        </option>
+
+                                        <option value="Almacenista">
+                                            Almacenista
+                                        </option>
+
+                                        <option value="Vendedor">
+                                            Vendedor
+                                        </option>
+
+                                    </select>
+
+                                    <div class="invalid-feedback">
+                                        Debes seleccionar un rol.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ACTIVO -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="activoUsuario"
+                                           class="form-label">
+
+                                        Estado
+
+                                    </label>
+
+                                    <select id="activoUsuario"
+                                            class="form-select"
+                                            required>
+
+                                        <option value="true">
+                                            Activo
+                                        </option>
+
+                                        <option value="false">
+                                            Inactivo
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- BOTONES -->
+
+                            <div class="botones-formulario">
+
+                                <button type="submit"
+                                        class="btn btn-primary">
+
+                                    <i class="bi bi-person-plus"></i>
+                                    Agregar usuario
+
+                                </button>
+
+                                <button type="button"
+                                        id="btnCancelarAgregarUsuario"
+                                        class="btn btn-secondary">
+
+                                    Cancelar
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- ==========================================
+         FORMULARIO ACTUALIZAR
+    ========================================== -->
+
+                    <!-- FORM ACTUALIZAR -->
+                    <div id="formActualizarUsuario"
+                         class="formulario-crud"
+                         style="display: none;">
+
+                        <h4>Actualizar usuario</h4>
+
+                        <form id="formEditarUsuario" novalidate>
+
+                            <!-- SELECCIONAR ID -->
+                            <div class="mb-3">
+
+                                <label for="idActualizarUsuario"
+                                       class="form-label">
+                                    Seleccionar usuario
+                                </label>
+
+                                <select id="idActualizarUsuario"
+                                        class="form-select"
+                                        required>
+
+                                    <option value="">
+                                        Selecciona un usuario
+                                    </option>
+
+                                </select>
+
+                                <div class="invalid-feedback">
+                                    Debes seleccionar un usuario.
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="nombreActualizarUsuario"
+                                           class="form-label">
+                                        Nombre
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreActualizarUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El nombre es obligatorio.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="apellidoActualizarUsuario"
+                                           class="form-label">
+                                        Apellido
+                                    </label>
+
+                                    <input type="text"
+                                           id="apellidoActualizarUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El apellido es obligatorio.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="nombreActualizarUsuarioLogin"
+                                           class="form-label">
+                                        Nombre de usuario
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreActualizarUsuarioLogin"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        El nombre de usuario es obligatorio.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="correoActualizarUsuario"
+                                           class="form-label">
+                                        Correo electrónico
+                                    </label>
+
+                                    <input type="email"
+                                           id="correoActualizarUsuario"
+                                           class="form-control"
+                                           required>
+
+                                    <div class="invalid-feedback">
+                                        Ingresa un correo electrónico válido.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="passwordActualizarUsuario"
+                                           class="form-label">
+                                        Nueva contraseña
+                                    </label>
+
+                                    <input type="password"
+                                           id="passwordActualizarUsuario"
+                                           class="form-control">
+
+                                    <div class="form-text">
+                                        Déjalo vacío si no deseas cambiarla.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="rolActualizarUsuario"
+                                           class="form-label">
+                                        Rol
+                                    </label>
+
+                                    <select id="rolActualizarUsuario"
+                                            class="form-select"
+                                            required>
+
+                                        <option value="">
+                                            Selecciona un rol
+                                        </option>
+
+                                        <option value="Administrador">
+                                            Administrador
+                                        </option>
+
+                                        <option value="Almacenista">
+                                            Almacenista
+                                        </option>
+
+                                        <option value="Vendedor">
+                                            Vendedor
+                                        </option>
+
+                                    </select>
+
+                                    <div class="invalid-feedback">
+                                        Debes seleccionar un rol.
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label for="activoActualizarUsuario"
+                                           class="form-label">
+                                        Estado
+                                    </label>
+
+                                    <select id="activoActualizarUsuario"
+                                            class="form-select"
+                                            required>
+
+                                        <option value="true">
+                                            Activo
+                                        </option>
+
+                                        <option value="false">
+                                            Inactivo
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="botones-formulario">
+
+                                <button type="submit"
+                                        class="btn btn-primary">
+
+                                    <i class="bi bi-pencil-square"></i>
+                                    Actualizar usuario
+
+                                </button>
+
+                                <button type="button"
+                                        id="btnCancelarActualizarUsuario"
+                                        class="btn btn-secondary">
+
+                                    Cancelar
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- ==========================================
+         FORMULARIO ELIMINAR
+    ========================================== -->
+                    <!-- FORM ELIMINAR -->
+                    <div id="formEliminarUsuario"
+                         class="formulario-crud"
+                         style="display: none;">
+
+                        <h4>Eliminar usuario</h4>
+
+                        <form id="formBorrarUsuario" novalidate>
+
+                            <!-- SELECCIONAR ID -->
+                            <div class="mb-3">
+
+                                <label for="idEliminarUsuario"
+                                       class="form-label">
+                                    Seleccionar usuario
+                                </label>
+
+                                <select id="idEliminarUsuario"
+                                        class="form-select"
+                                        required>
+
+                                    <option value="">
+                                        Selecciona un usuario
+                                    </option>
+
+                                </select>
+
+                                <div class="invalid-feedback">
+                                    Debes seleccionar un usuario.
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Nombre
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreEliminarUsuario"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Apellido
+                                    </label>
+
+                                    <input type="text"
+                                           id="apellidoEliminarUsuario"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Nombre de usuario
+                                    </label>
+
+                                    <input type="text"
+                                           id="nombreEliminarUsuarioLogin"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Correo electrónico
+                                    </label>
+
+                                    <input type="text"
+                                           id="correoEliminarUsuario"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Rol
+                                    </label>
+
+                                    <input type="text"
+                                           id="rolEliminarUsuario"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Estado
+                                    </label>
+
+                                    <input type="text"
+                                           id="activoEliminarUsuario"
+                                           class="form-control"
+                                           readonly>
+
+                                </div>
+
+                            </div>
+
+                            <div class="botones-formulario">
+
+                                <button type="submit"
+                                        class="btn btn-danger">
+
+                                    <i class="bi bi-person-x"></i>
+                                    Eliminar usuario
+
+                                </button>
+
+                                <button type="button"
+                                        id="btnCancelarEliminarUsuario"
+                                        class="btn btn-secondary">
+
+                                    Cancelar
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- ==========================================
+         TABLA
+    ========================================== -->
+
+                    <div class="tabla-crud">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <h4>Usuarios registrados</h4>
+
+                            <span id="contadorUsuarios"
+                                  class="badge">
+
+                                0 usuarios
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaUsuariosBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================= HISTORIAL ================= -->
+                <div class="tab-pane fade"
+                     id="historial"
+                     role="tabpanel"
+                     aria-labelledby="historial-tab"
+                     tabindex="0">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                CONSULTAS
+                            </span>
+
+                            <h2>Historial de inventario</h2>
+
+                            <p>
+                                Consulta el inventario actual y los movimientos realizados.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+                        <!-- ================= IZQUIERDA ================= -->
+                        <div class="col-12 col-xl-8">
+
+                            <!-- INVENTARIO ACTUAL -->
+                            <div class="admin-placeholder mb-4">
+
+                                <h3>
+                                    <i class="bi bi-boxes me-2"></i>
+                                    Inventario actual
+                                </h3>
+
+                                <div class="table-responsive mt-3">
+
+                                    <table class="table table-bordered align-middle" id="tablaInventarioAdmin">
+
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Producto</th>
+                                                <th>Categoría</th>
+                                                <th>Proveedor</th>
+                                                <th>Stock</th>
+                                                <th>Precio</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="tablaInventarioAdminBody">
+                                            <!-- Los productos se cargarán desde la API -->
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- HISTORIAL -->
+                            <div class="admin-placeholder">
+
+                                <h3>
+                                    <i class="bi bi-clock-history me-2"></i>
+                                    Historial de movimientos
+                                </h3>
+
+                                <div class="table-responsive mt-3">
+
+                                    <table class="table table-bordered align-middle" id="tablaHistorialAdmin">
+
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Producto</th>
+                                                <th>Tipo</th>
+                                                <th>Cantidad</th>
+                                                <th>Fecha</th>
+                                                <th>Motivo</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="tablaHistorialAdminBody">
+                                            <!-- Los movimientos se cargarán desde la API -->
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= DERECHA ================= -->
+                        <div class="col-12 col-xl-4">
+
+                            <div class="admin-placeholder">
+
+                                <h3>
+                                    <i class="bi bi-arrow-left-right me-2"></i>
+                                    Registrar movimiento
+                                </h3>
+
+                                <p>
+                                    Registra entradas, salidas o ajustes de productos.
+                                </p>
+
+
+                                <form id="formMovimientoAdmin">
+
+                                    <div class="mb-3">
+
+                                        <label class="form-label">
+                                            Producto
+                                        </label>
+
+                                        <select class="form-select" id="productoMovimientoAdmin" name="idProducto" required>
+                                            <option value="">Selecciona un producto</option>
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="form-label">
+                                            Tipo de movimiento
+                                        </label>
+
+                                        <select class="form-select" id="tipoMovimientoAdmin" name="tipoMovimiento" required>
+                                            <option value="">Selecciona una opción</option>
+                                            <option value="ENTRADA">ENTRADA</option>
+                                            <option value="SALIDA">SALIDA</option>
+                                            <option value="AJUSTE">AJUSTE</option>
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="form-label">
+                                            Cantidad
+                                        </label>
+
+                                        <input type="number"
+                                               class="form-control"
+                                               id="cantidadMovimientoAdmin"
+                                               name="cantidad"
+                                               min="1"
+                                               placeholder="Ej. 5"
+                                               required />
+
+                                    </div>
+
+
+                                    <div class="mb-4">
+
+                                        <label class="form-label">
+                                            Motivo
+                                        </label>
+
+                                        <textarea class="form-control"
+                                                  id="motivoMovimientoAdmin"
+                                                  name="motivo"
+                                                  rows="3"
+                                                  placeholder="Ej. Compra de mercancía"
+                                                  required></textarea>
+
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        Registrar movimiento
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================= VENTAS ================= -->
+                <div class="tab-pane fade"
+                     id="ventas"
+                     role="tabpanel"
+                     aria-labelledby="ventas-tab"
+                     tabindex="0">
+
+                    <!-- AQUÍ LA INTERFAZ DE MI VENDEDOR -->
+                    <main class="vendedor-container">
+
+                        <div class="vendedor-grid">
+
+
+                            <!-- ==========================================
+                                 COLUMNA IZQUIERDA
+                                 REALIZAR VENTA
+                            =========================================== -->
+
+                            <section class="venta-card">
+
+                                <div class="venta-card-header">
+
+                                    <div>
+
+                                        <h2>
+                                            <i class="bi bi-cart-plus"></i>
+                                            Realizar venta
+                                        </h2>
+
+                                        <p>
+                                            Agrega productos y realiza una nueva venta.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ==========================================
+                                     BUSCAR PRODUCTO
+                                =========================================== -->
+
+                                <div class="venta-form">
+
+                                    <div class="form-group-vendedor">
+
+                                        <label for="buscarProductoVenta">
+                                            Buscar producto
+                                        </label>
+
+                                        <div class="input-icon">
+
+                                            <i class="bi bi-search"></i>
+
+                                            <input type="text"
+                                                   id="buscarProductoVenta"
+                                                   class="form-control"
+                                                   placeholder="Buscar por nombre o código...">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         SELECCIONAR PRODUCTO
+                                    =========================================== -->
+
+                                    <div class="form-group-vendedor">
+
+                                        <label for="productoVenta">
+                                            Producto
+                                        </label>
+
+                                        <select id="productoVenta"
+                                                class="form-select">
+
+                                            <option value="">
+                                                Seleccionar producto...
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         CANTIDAD
+                                    =========================================== -->
+
+                                    <div class="form-group-vendedor">
+
+                                        <label>
+                                            Cantidad
+                                        </label>
+
+                                        <div class="cantidad-control">
+
+                                            <button type="button"
+                                                    class="btn-cantidad"
+                                                    id="btnDisminuirCantidad">
+
+                                                <i class="bi bi-dash"></i>
+
+                                            </button>
+
+                                            <input type="number"
+                                                   id="cantidadVenta"
+                                                   value="1"
+                                                   min="1"
+                                                   class="cantidad-input">
+
+                                            <button type="button"
+                                                    class="btn-cantidad"
+                                                    id="btnAumentarCantidad">
+
+                                                <i class="bi bi-plus"></i>
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         BOTÓN AGREGAR
+                                    =========================================== -->
+
+                                    <button type="button"
+                                            class="btn-agregar-carrito"
+                                            id="btnAgregarCarrito">
+
+                                        <i class="bi bi-cart-plus"></i>
+
+                                        Agregar al carrito
+
+                                    </button>
+
+                                </div>
+
+
+                                <!-- ==========================================
+                                     CARRITO
+                                =========================================== -->
+
+                                <div class="carrito-section">
+
+                                    <div class="carrito-header">
+
+                                        <div>
+
+                                            <h3>
+                                                <i class="bi bi-cart3"></i>
+                                                Carrito
+                                            </h3>
+
+                                            <p>
+                                                Productos de la venta actual.
+                                            </p>
+
+                                        </div>
+
+                                        <span class="carrito-contador"
+                                              id="contadorCarrito">
+
+                                            0 productos
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="carrito-tabla-container">
+
+                                        <table class="carrito-tabla">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>Producto</th>
+
+                                                    <th>Cantidad</th>
+
+                                                    <th>Precio</th>
+
+                                                    <th>Subtotal</th>
+
+                                                    <th></th>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody id="carritoBody">
+
+                                                <tr class="carrito-vacio">
+
+                                                    <td colspan="5">
+
+                                                        <i class="bi bi-cart-x"></i>
+
+                                                        <span>
+                                                            No hay productos en el carrito.
+                                                        </span>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         TOTAL
+                                    =========================================== -->
+
+                                    <div class="carrito-total">
+
+                                        <span>
+                                            Total de la venta
+                                        </span>
+
+                                        <strong id="totalVenta">
+                                            $0.00
+                                        </strong>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         BOTONES
+                                    =========================================== -->
+
+                                    <div class="venta-actions">
+
+                                        <button type="button"
+                                                class="btn-cancelar-venta"
+                                                id="btnCancelarVenta">
+
+                                            <i class="bi bi-x-circle"></i>
+
+                                            Cancelar
+
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn-confirmar-venta"
+                                                id="btnConfirmarVenta">
+
+                                            <i class="bi bi-check-circle"></i>
+
+                                            Realizar venta
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+
+                            <!-- ==========================================
+                                 COLUMNA DERECHA
+                            =========================================== -->
+
+                            <div class="columna-derecha-vendedor">
+
+
+                                <!-- ==========================================
+                                     PRODUCTOS DISPONIBLES
+                                =========================================== -->
+
+                                <section class="productos-card">
+
+                                    <div class="productos-card-header">
+
+                                        <div>
+
+                                            <h2>
+                                                <i class="bi bi-box-seam"></i>
+                                                Productos disponibles
+                                            </h2>
+
+                                            <p>
+                                                Consulta los productos disponibles en inventario.
+                                            </p>
+
+                                        </div>
+
+                                        <div class="productos-contador">
+
+                                            <i class="bi bi-box"></i>
+
+                                            <span id="contadorProductosVentaAdmin">
+                                                0 productos
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         BUSCADOR DE PRODUCTOS DE VENTAS
+                                    =========================================== -->
+
+                                    <div class="tabla-buscador">
+
+                                        <div class="input-icon">
+
+                                            <i class="bi bi-search"></i>
+
+                                            <input type="text"
+                                                   id="buscarProductosVentaAdmin"
+                                                   class="form-control"
+                                                   placeholder="Buscar producto...">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         TABLA DE PRODUCTOS DE VENTAS
+                                    =========================================== -->
+
+                                    <div class="tabla-container">
+
+                                        <table class="tabla-vendedor">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>ID</th>
+                                                    <th>Producto</th>
+                                                    <th>Precio</th>
+                                                    <th>Stock</th>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody id="tablaProductosVentaAdmin">
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </section>
+
+
+                                <!-- ==========================================
+                                     VENTAS REALIZADAS
+                                =========================================== -->
+
+                                <section class="ventas-card">
+
+                                    <div class="ventas-card-header">
+
+                                        <div>
+
+                                            <h2>
+                                                <i class="bi bi-receipt"></i>
+                                                Ventas realizadas
+                                            </h2>
+
+                                            <p>
+                                                Consulta las ventas realizadas.
+                                            </p>
+
+                                        </div>
+
+                                        <div class="ventas-contador">
+
+                                            <i class="bi bi-receipt-cutoff"></i>
+
+                                            <span id="contadorVentas">
+                                                0 ventas
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         BUSCADOR
+                                    =========================================== -->
+
+                                    <div class="tabla-buscador">
+
+                                        <div class="input-icon">
+
+                                            <i class="bi bi-search"></i>
+
+                                            <input type="text"
+                                                   id="buscarVentas"
+                                                   class="form-control"
+                                                   placeholder="Buscar venta...">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- ==========================================
+                                         TABLA DE VENTAS
+                                    =========================================== -->
+
+                                    <div class="tabla-container">
+
+                                        <table class="tabla-vendedor">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>ID</th>
+                                                    <th>Fecha</th>
+                                                    <th>Total</th>
+                                                    <th>Acción</th>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody id="tablaVentasBody">
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </section>
+
+                            </div>
+
+                        </div>
+
+                    </main>
+
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</main>
+
+
+        <!-- PIE DE PAGINA -->
+        <footer class="admin-footer">
+
+            PokéMart · Sistema de Inventario
+            <span>|</span>
+            Panel de administración
+
+        </footer>
+
+    </div>
+
+
+
+    <!-- MODAL DE RESULTADO -->
+    <div class="modal fade" id="modalResultadoProducto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-producto">
+
+                <div class="modal-header">
+                    <div class="modal-icono">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Cerrar">
+                    </button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <h4 id="modalResultadoTitulo">
+                        Producto agregado
+                    </h4>
+
+                    <p id="modalResultadoMensaje">
+                        El producto se agregó correctamente al inventario.
+                    </p>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <button type="button"
+                            class="btn btn-guardar-producto"
+                            data-bs-dismiss="modal">
+                        Aceptar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<!-- MODAL DE AVISO DE MOVIMIENTO -->
+<div class="modal fade"
+     id="modalMovimientoAdmin"
+     tabindex="-1"
+     aria-labelledby="modalMovimientoTitulo"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content modal-movimiento">
+
+            <div class="modal-body text-center">
+
+                <!-- ICONO -->
+                <div id="modalMovimientoIcono"
+                     class="movimiento-icono exito">
+
+                    <i class="bi bi-check-lg"></i>
+
+                </div>
+
+                <!-- TITULO -->
+                <h4 id="modalMovimientoTitulo">
+                    Movimiento registrado
+                </h4>
+
+                <!-- MENSAJE -->
+                <p id="modalMovimientoMensaje">
+                    El movimiento se registró correctamente.
+                </p>
+
+                <!-- BOTON -->
+                <button type="button"
+                        class="btn btn-movimiento"
+                        data-bs-dismiss="modal">
+
+                    Entendido
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- MODAL DE RESULTADO CATEGORIA -->
+<!-- ============================= -->
+
+<div class="modal fade"
+     id="modalResultadoCategoria"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content modal-categoria">
+
+            <div class="modal-header">
+
+                <div class="modal-icono-categoria">
+                    <i class="bi bi-check-lg"
+                       id="modalCategoriaIcono">
+                    </i>
+                </div>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                </button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <h4 id="modalCategoriaTitulo">
+                    Categoría agregada
+                </h4>
+
+                <p id="modalCategoriaMensaje">
+                    La categoría se agregó correctamente.
+                </p>
+
+            </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <button type="button"
+                        class="btn btn-guardar-producto"
+                        data-bs-dismiss="modal">
+
+                    Aceptar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- MODAL DE RESULTADO PROVEEDOR -->
+<!-- ============================= -->
+
+<div class="modal fade"
+     id="modalResultadoProveedor"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content modal-proveedor">
+
+            <div class="modal-header">
+
+                <div class="modal-icono-proveedor">
+
+                    <i class="bi bi-check-lg"
+                       id="modalProveedorIcono">
+                    </i>
+
+                </div>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                </button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <h4 id="modalProveedorTitulo">
+                    Proveedor agregado
+                </h4>
+
+                <p id="modalProveedorMensaje">
+                    El proveedor se agregó correctamente.
+                </p>
+
+            </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <button type="button"
+                        class="btn btn-guardar-producto"
+                        data-bs-dismiss="modal">
+
+                    Aceptar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     MODAL OPERACIÓN EXITOSA
+========================================== -->
+
+<div class="modal fade"
+     id="modalUsuarioExito"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    <i class="bi bi-check-circle"></i>
+                    Operación realizada
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p id="mensajeUsuarioExito"
+                   class="mb-0">
+                    Operación realizada correctamente.
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal">
+                    Aceptar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     MODAL CONFIRMAR ELIMINACIÓN
+========================================== -->
+
+<div class="modal fade"
+     id="modalConfirmarEliminarUsuario"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    Confirmar eliminación
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p class="mb-2">
+                    ¿Estás seguro de que deseas eliminar este usuario?
+                </p>
+
+                <p class="mb-0">
+                    <strong id="nombreUsuarioEliminarModal">
+                    </strong>
+                </p>
+
+                <small class="text-muted">
+                    Esta acción no se puede deshacer.
+                </small>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button type="button"
+                        id="btnConfirmarEliminarUsuario"
+                        class="btn btn-danger">
+
+                    <i class="bi bi-person-x"></i>
+                    Sí, eliminar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- JavaScript de Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Administrador.js" asp-append-version="true"></script>
+    <script src="~/js/adminHistorial.js"></script>
+    <script src="~/js/Categorias.js"></script>
+    <script src="~/js/Proveedores.js"></script>
+    <script src="~/js/usuarios.js"></script>
+    <script src="~/js/vendedoradmin.js"></script>
+
+</body>

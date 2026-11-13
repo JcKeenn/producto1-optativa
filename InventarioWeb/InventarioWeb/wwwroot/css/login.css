@@ -1,0 +1,407 @@
+/* ==========================================
+   LOGIN — Tema Pokémon TCG
+   Paleta: rojo Pokéball, amarillo Pikachu,
+   azul contorno, navy Pokédex
+   ========================================== */
+
+:root {
+    --pk-red: #E3350D;
+    --pk-red-dark: #B62602;
+    --pk-yellow: #FFCB05;
+    --pk-yellow-soft: #FFE88A;
+    --pk-blue: #2A75BB;
+    --pk-navy: #1D2C5E;
+    --pk-ink: #17203A;
+    --pk-paper: #F4EFE4;
+    --pk-card: #FFFFFF;
+    --pk-green: #2E9E5B;
+
+    --pk-border: 3px solid var(--pk-navy);
+    --pk-radius: 20px;
+    --pk-shadow: 8px 8px 0 var(--pk-navy);
+    --pk-shadow-sm: 4px 4px 0 var(--pk-navy);
+
+    --font-brand: "Fredoka", "Nunito", sans-serif;
+    --font-body: "Nunito", "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--pk-ink);
+    background-color: var(--pk-paper);
+    background-image: radial-gradient(rgba(29, 44, 94, .09) 2px, transparent 2px);
+    background-size: 24px 24px;
+}
+
+
+/* ========== LAYOUT SPLIT ========== */
+
+.login-hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(320px, 45%) 1fr;
+}
+
+
+/* ========== PANEL DE MARCA (rojo) ========== */
+
+.login-brand-side {
+    background:
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, .18) 0 60px, transparent 60px),
+        radial-gradient(circle at 10% 90%, rgba(0, 0, 0, .10) 0 90px, transparent 90px),
+        linear-gradient(160deg, var(--pk-red) 0%, var(--pk-red-dark) 100%);
+    color: #fff;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: var(--pk-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-brand-side::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    right: -160px;
+    bottom: -160px;
+    border-radius: 50%;
+    background:
+        linear-gradient(rgba(255, 255, 255, .14) 46%,
+                        rgba(29, 44, 94, .35) 46% 54%,
+                        rgba(255, 255, 255, .14) 54%);
+    pointer-events: none;
+}
+
+.brand-top {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.brand-kicker {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    color: var(--pk-yellow);
+}
+
+.brand-core {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+}
+
+.brand-title {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    letter-spacing: .02em;
+    color: #fff;
+    margin: 0;
+    text-shadow: 4px 4px 0 rgba(29, 44, 94, .55);
+}
+
+.brand-title span {
+    color: var(--pk-yellow);
+}
+
+.brand-tagline {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .92);
+    max-width: 34ch;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.brand-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: .4rem;
+}
+
+.brand-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    font-weight: 800;
+    font-size: .85rem;
+    color: var(--pk-navy);
+    background: var(--pk-yellow);
+    border: 2px solid var(--pk-navy);
+    border-radius: 999px;
+    padding: .35rem .9rem;
+    box-shadow: 3px 3px 0 rgba(29, 44, 94, .85);
+}
+
+.brand-foot {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .85);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+
+
+/* ========== PANEL DE FORMULARIO ========== */
+
+.login-form-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 3rem 1.5rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    background: var(--pk-card);
+    border: var(--pk-border);
+    border-radius: var(--pk-radius);
+    box-shadow: var(--pk-shadow);
+    padding: 2.2rem 2rem;
+}
+
+
+/* ------- título ------- */
+
+.login-title {
+    text-align: center;
+    margin-bottom: 1.6rem;
+}
+
+.login-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: .9rem;
+}
+
+.login-title h2 {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--pk-navy);
+    margin: 0 0 .3rem;
+}
+
+.login-title p {
+    color: var(--pk-blue);
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .5rem;
+}
+
+.login-title .alert {
+    margin-top: 1rem;
+    border: 2px solid var(--pk-navy);
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 3px 3px 0 rgba(29, 44, 94, .25);
+}
+
+
+/* ------- inputs ------- */
+
+.form-label {
+    font-weight: 800;
+    color: var(--pk-navy);
+    font-size: .92rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.input-group-text {
+    background: var(--pk-yellow);
+    border: 2px solid var(--pk-navy);
+    border-right: 0;
+    border-radius: 12px 0 0 12px;
+    color: var(--pk-navy);
+    font-size: 1.05rem;
+}
+
+.form-control {
+    border: 2px solid var(--pk-navy);
+    border-radius: 0 12px 12px 0;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--pk-ink);
+    padding: .7rem .95rem;
+    background: #FDFBF5;
+}
+
+.form-control::placeholder {
+    color: #9AA3B8;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    background: #fff;
+    border-color: var(--pk-blue);
+    box-shadow: 0 0 0 4px rgba(42, 117, 187, .18);
+}
+
+
+/* ------- botón ------- */
+
+.btn-login {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: .03em;
+    color: #fff;
+    background: var(--pk-red-dark);
+    border: var(--pk-border);
+    border-radius: 14px;
+    padding: .8rem 1rem;
+    box-shadow: var(--pk-shadow-sm);
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.btn-login:hover {
+    background: var(--pk-red);
+    color: #fff;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--pk-navy);
+}
+
+.btn-login:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--pk-navy);
+}
+
+.btn-login:focus-visible,
+.form-control:focus-visible,
+.brand-chip:focus-visible {
+    outline: 3px solid var(--pk-yellow);
+    outline-offset: 2px;
+}
+
+
+/* ------- footer ------- */
+
+.login-footer {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--pk-navy);
+    opacity: .75;
+}
+
+.footer-dot {
+    color: var(--pk-red);
+}
+
+
+/* ========== POKÉBOLA (CSS puro) ========== */
+
+.pk-ball {
+    border-radius: 50%;
+    border: 3px solid var(--pk-navy);
+    background: linear-gradient(var(--pk-red) 46%, #1F1F1F 46% 54%, #fff 54%);
+    position: relative;
+    flex: none;
+    box-shadow: 3px 3px 0 rgba(29, 44, 94, .35);
+}
+
+.pk-ball::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28%;
+    height: 28%;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--pk-navy);
+    transform: translate(-50%, -50%);
+}
+
+.pk-ball-sm   { width: 26px;  height: 26px; }
+.pk-ball-md   { width: 52px;  height: 52px; }
+.pk-ball-hero {
+    width: 110px;
+    height: 110px;
+    animation: pk-balance 4s ease-in-out infinite;
+}
+
+@keyframes pk-balance {
+    0%, 100% { transform: rotate(-8deg); }
+    50%      { transform: rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pk-ball-hero {
+        animation: none;
+    }
+
+    * {
+        transition-duration: .01ms !important;
+    }
+}
+
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 900px) {
+    .login-hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .login-brand-side {
+        border-right: 0;
+        border-bottom: var(--pk-border);
+        padding: 1.6rem 1.4rem;
+        gap: 1rem;
+    }
+
+    .login-brand-side::before {
+        width: 260px;
+        height: 260px;
+        right: -100px;
+        bottom: -130px;
+    }
+
+    .brand-core {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .pk-ball-hero {
+        width: 60px;
+        height: 60px;
+        animation: none;
+    }
+
+    .brand-title {
+        font-size: 2rem;
+    }
+
+    .brand-tagline,
+    .brand-foot {
+        display: none;
+    }
+}
